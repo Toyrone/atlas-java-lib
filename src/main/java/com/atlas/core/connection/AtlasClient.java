@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicodelabs.jusibe.core.connection;
+package com.atlas.core.connection;
 
-import com.unicodelabs.jusibe.core.utils.JusibeResponse;
+import com.atlas.core.utils.AtlasResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,7 +19,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -28,13 +27,12 @@ import org.apache.http.message.BasicNameValuePair;
  *
  * @author Raphson
  */
-public class JusibeClient {
+public class AtlasClient {
     
     /**
-     * Jusibe API Base Url 
+     * Atlas API Base URL 
      */
-    private final String baseURL = "https://jusibe.com";
-    
+    private final String baseURL = "https://devsms.atlas.money/v1";
     
     /**
      * HttpClient User Agent
@@ -74,43 +72,15 @@ public class JusibeClient {
     
     /**
      * class constructor
-     * @param publicKey
-     * @param accessToken
+     * @param apiKey
+     * @param secretKey
      * @throws java.net.MalformedURLException
      */
-    public JusibeClient(String publicKey, String accessToken) throws MalformedURLException{
-        encoding = Base64.encodeBase64String((publicKey + ":" + accessToken).getBytes());
+    public AtlasClient(String apiKey, String secretKey) throws MalformedURLException{
+        encoding = Base64.encodeBase64String((apiKey + ":" + secretKey).getBytes());
         client = HttpClientBuilder.create().build();
     }
-    
-    
-    /**
-     * Perform a GET request
-     * @param relativeUrl
-     * @return 
-     * @throws java.io.IOException 
-     */
-    public JusibeResponse performGetRequest(String relativeUrl) throws IOException{
-        HttpGet request = new HttpGet(baseURL + relativeUrl);
-
-        // add request header
-        request.addHeader("User-Agent", USER_AGENT);
-        request.setHeader("Authorization", "Basic " + encoding);
-        response = client.execute(request);
-        responseCode = response.getStatusLine().getStatusCode();
-        
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        result = new StringBuffer();
-        
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-                result.append(line);
-        }
-        
-        return new JusibeResponse(responseCode, result.toString());
-    }
-    
-    
+  
     /**
      * Perform a POST request
      * @param relativeUrl
@@ -118,7 +88,7 @@ public class JusibeClient {
      * @return 
      * @throws java.io.UnsupportedEncodingException 
      */
-    public JusibeResponse performPostRequest(String relativeUrl, Map<String, String> data) 
+    public AtlasResponse performPostRequest(String relativeUrl, Map<String, String> data) 
             throws UnsupportedEncodingException, IOException {
         HttpPost request = new HttpPost(baseURL + relativeUrl);
 
@@ -143,6 +113,6 @@ public class JusibeClient {
             result.append(line);
         
         
-        return new JusibeResponse(responseCode, result.toString());     
+        return new AtlasResponse(responseCode, result.toString());     
     }
 }

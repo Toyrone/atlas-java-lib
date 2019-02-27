@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicodelabs.jusibe.core.utils;
+package com.atlas.core.utils;
 
 /**
  *
  * @author Raphson
  */
-public class JusibeResponse {
+public class AtlasResponse {
     
     /**
      * Response Code
@@ -24,11 +24,11 @@ public class JusibeResponse {
      */
     private String responseMessage;
 
-    public JusibeResponse() {
+    public AtlasResponse() {
     }
 
     
-    public JusibeResponse(int responseCode, String responseMessage) {
+    public AtlasResponse(int responseCode, String responseMessage) {
         this.responseCode = responseCode;
         this.responseMessage = responseMessage;
     }

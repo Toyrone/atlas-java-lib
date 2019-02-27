@@ -1,10 +1,10 @@
-package com.unicodelabs.jusibe.core.example;
+package com.atlas.core.example;
 
 
 
-import com.unicodelabs.jusibe.core.Jusibe;
-import com.unicodelabs.jusibe.core.exceptions.IsNullException;
-import com.unicodelabs.jusibe.core.utils.JusibeResponse;
+import com.atlas.core.Atlas;
+import com.atlas.core.exceptions.IsNullException;
+import com.atlas.core.utils.AtlasResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,14 +25,14 @@ public class App
   
     public static void main( String[] args ){
         try {
-            final Jusibe client = new Jusibe(PUBLIC_KEY, ACCESS_TOKEN);
+            final Atlas client = new Atlas(PUBLIC_KEY, ACCESS_TOKEN);
             final Map<String, String> smsParams = new HashMap<String, String>();
             
             smsParams.put("to", "08091167643"); // Replace with a valid phone number
             smsParams.put("from", "iamraphson"); // Replace with a valid phone number in your account
-            smsParams.put("message", "Welcome to Jusibe JAVA lib");
+            smsParams.put("message", "Welcome to Atlas JAVA lib");
             
-            JusibeResponse smsResponse = client.sendSMS(smsParams);
+            AtlasResponse smsResponse = client.sendSMS(smsParams);
             System.out.println(smsResponse.toString());
             
             JSONObject smsResultObject = 
@@ -44,35 +44,6 @@ public class App
                 System.out.println("your request speed is " + smsResultObject.get("request_speed"));
             } else {
                 System.out.println(smsResultObject.get("error"));
-            }
-            
-            
-            JusibeResponse balResponse = client.checkAvailableCredits();
-            System.out.println(balResponse.toString());
-            JSONObject balResultObject = 
-                        (JSONObject)new JSONParser().parse(balResponse.getResponseMessage());
-            if(balResponse.getResponseCode() == 200){
-                System.out.println("your SMS balance is " + balResultObject.get("sms_credits"));
-                System.out.println("your request speed is " + balResultObject.get("request_speed"));
-            } else {
-                System.out.println(balResultObject.get("error"));
-            }
-            
-            
-            JusibeResponse deliveryResponse = 
-                    client.checkDeliveryStatus("w719zxz58q");
-            System.out.println(deliveryResponse.toString());
-            JSONObject deliveryResultObject = 
-                        (JSONObject)new JSONParser().parse(deliveryResponse.getResponseMessage());
-            if(deliveryResponse.getResponseCode() == 200){
-                System.out.println("your SMS Status is " + deliveryResultObject.get("status"));
-                System.out.println("your SMS Message ID is " + deliveryResultObject.get("message_id"));
-                System.out.println("your SMS Sent Date is " + deliveryResultObject.get("date_sent"));
-                System.out.println("your SMS Delivered Date is " 
-                        + deliveryResultObject.get("date_delivered"));
-                System.out.println("your request speed is " + deliveryResultObject.get("request_speed"));
-            } else {
-                System.out.println(deliveryResultObject.get("error"));
             }
             
             
