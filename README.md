@@ -1,13 +1,13 @@
-### Jusibe-java-lib
+### Atlas-java-lib
 
- > Jusibe Library for JAVA☕️. This is based on the Official API Documentation provided by [Atlas](https://sms.atlas.money) an African SMS Service.
+ > Atlas Library for JAVA☕️. This is based on the Official API Documentation provided by [Atlas](https://sms.atlas.money) an African SMS Service.
 
 
 ### Registration
 
 First, you will need to first create an account at [atlas.money](https://sms.atlas.money/signup/) and obtain your Public key and Access Token.
 
-Once you have created an account, you can access your Public key and Access Token from the [API Keys](https://jusibe.com/cp/?section=api-keys).
+Once you have created an account, you can access your Api key and secret key.
 
 # Installation
 

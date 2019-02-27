@@ -20,17 +20,17 @@ import org.json.simple.parser.ParseException;
  */
 public class App 
 {
-    public static final String PUBLIC_KEY = "09de5bec3937d2d032d8a75b41f9081b";
-    public static final String ACCESS_TOKEN = "68501b2b40767fc51e4f936d7db40fc0";
+    public static final String API_KEY = "09de5bec3937d2d032d8a75b41f9081b";
+    public static final String SECRET_KEY = "68501b2b40767fc51e4f936d7db40fc0";
   
     public static void main( String[] args ){
         try {
-            final Atlas client = new Atlas(PUBLIC_KEY, ACCESS_TOKEN);
+            final Atlas client = new Atlas(API_KEY, SECRET_KEY);
             final Map<String, String> smsParams = new HashMap<String, String>();
             
             smsParams.put("to", "08091167643"); // Replace with a valid phone number
-            smsParams.put("from", "iamraphson"); // Replace with a valid phone number in your account
-            smsParams.put("message", "Welcome to Atlas JAVA lib");
+            smsParams.put("from", "Toyrone"); // Replace with a valid phone number in your account
+            smsParams.put("message", "Welcome to Atlas Java lib");
             
             AtlasResponse smsResponse = client.sendSMS(smsParams);
             System.out.println(smsResponse.toString());
